@@ -1,0 +1,27 @@
+{
+  "ruleId": "PL-003",
+  "configure": {
+    "PL-003": {
+      "minRate": 1,
+      "maxRate": 8
+    }
+  },
+  "pairs": [
+    {
+      "name": "expected-state",
+      "material": "PL-003-compliant.json",
+      "expect": {
+        "ruleId": "PL-003",
+        "count": 0
+      }
+    },
+    {
+      "name": "difference-present",
+      "material": "PL-003-unsafe.json",
+      "expect": {
+        "ruleId": "PL-003",
+        "count": 1
+      }
+    }
+  ]
+}

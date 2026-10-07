@@ -1,0 +1,134 @@
+# 线损拆分核对 规则库
+#
+# 规则数据与代码分离：替换本文件即可切换规则集版本，无需改动 TypeScript。
+#
+# 条款引用纪律（由 shared/ruleset.ts 强制校验）：
+#   - 每条规则必须写全 document / number / clause / excerpt / kind / source，
+#     且 excerpt 必须是逐字摘录，不得改写。
+#   - kind: direct                       条款直接规定了所检查的要求
+#   - kind: derived-from-principle       条款未直接规定，仅能由原则性条款推论（severity 最多 warn）
+#   - kind: institutional-configuration 阈值出自本机构配置或本机构下达的考核指标（severity 最多 info）
+#
+# ⚠️⚠️ 本规则库最重要的一条说明：**excerpt 一律不是引文。**
+#   「供电量 = 售电量 + 线损电量」与「线损率 = 线损电量 ÷ 供电量」是**定义式**，
+#   其规范载体是 **DL/T 686-2018《电力网电能损耗计算导则》**（该标准现行有效，
+#   其目次已核实：第 3 章为「术语和定义」，第 8 章为「电力网电能损耗分析与降损措施效果计算」）。
+#   但**该标准正文未公开免费全文**，本次核查只取到目次，**未能逐字取得术语条文**。
+#   → 因此本规则库**不伪造任何"原文"**：每条规则的 excerpt 都直接写明"该条文本次未取得"，
+#     判定依据放在 note 里如实说明。kind 一律降为 derived-from-principle（封顶 warn）
+#     或 institutional-configuration（封顶 info）。
+#   → **取得标准正文后必须做两件事**：把 excerpt 换成真正的逐字摘录，把 kind 升为 direct。
+#     在那之前，本插件的命中信息只应被读作"这两个数对不上"，而不是"违反了某条标准"。
+#
+# ⚠️ 另外两条边界：
+#   - **线损考核指标是按线路、按年下达的本机构指标，不是国家标准**：
+#     PL-003 的上下限与 PL-005 的不平衡度限值出厂为空（0 = 未配置），未配置即进 skipped。
+#   - 本插件**不判断线损是否合理**、**不判断是否存在窃电或计量故障**：
+#     那需要现场核查与专业分析，不属于核对工具的范围。
+
+plugin: dsh-power-loss-split
+version: "2026.1"
+
+rules:
+  - id: PL-001
+    title: 线损电量应等于供电量减售电量
+    severity: warn
+    basis:
+      document: 《电力网电能损耗计算导则》
+      number: DL/T 686-2018
+      clause: 第3章 术语和定义
+      excerpt: 该条术语条文本次未取得：DL/T 686-2018 正文未公开免费全文，仅核实到其目次含「术语和定义」一章。
+      kind: derived-from-principle
+      source: https://ebook.chinabuilding.com.cn/zbooklib/bookpdf/probation?SiteID=1&bookID=141185
+    params:
+      toleranceKwh: 0
+    note: >-
+      本条核对的是**定义式**：线损电量 = 供电量 − 售电量。该式是线损统计的基础关系，
+      其规范载体为 DL/T 686-2018 第 3 章「术语和定义」（标准现行有效，章名已核实）。
+      因未能取得逐字条文，本条封顶 warn，并在此如实标注依据状态。
+      toleranceKwh 表示允许的四舍五入偏差，出场为 0（要求严格相等）；
+      若使用方按万 kWh 报送、存在进位差，应配置一个非零容差。
+      本条只做减法核对，**不判断三个数值中哪一个正确**，也不判断抄表是否同期。
+
+  - id: PL-002
+    title: 线损率应等于线损电量与供电量之比
+    severity: warn
+    basis:
+      document: 《电力网电能损耗计算导则》
+      number: DL/T 686-2018
+      clause: 第3章 术语和定义
+      excerpt: 该条术语条文本次未取得：DL/T 686-2018 正文未公开免费全文，仅核实到其目次含「术语和定义」一章。
+      kind: derived-from-principle
+      source: https://ebook.chinabuilding.com.cn/zbooklib/bookpdf/probation?SiteID=1&bookID=141185
+    alsoBasis:
+      - document: 《数值修约规则与极限数值的表示和判定》
+        number: GB/T 8170-2008
+        clause: 第3章 数值修约规则
+        excerpt: 该条条文本次未逐字取得：GB/T 8170-2008 为现行推荐性国家标准，其修约规则需查标准正文。
+        kind: derived-from-principle
+        source: https://openstd.samr.gov.cn/bzgk/std/std_list?p.p2=GB%2FT%208170
+    params:
+      tolerancePoints: 0.01
+    note: >-
+      本条核对的定义式：线损率(%) = 线损电量 ÷ 供电量 × 100。依据状态同 PL-001（未取得逐字条文）。
+      tolerancePoints 默认 0.01 个百分点，用于容纳四舍五入；修约规则本身另有 GB/T 8170-2008 可查，
+      该标准号已核实为现行推荐性国家标准，但同样未取得逐字条文。
+      本条只做除法核对，**不判断线损率的分母口径是否正确**（例如是否应扣除无损电量）：
+      口径问题必须由使用方在材料中说明或配置。
+
+  - id: PL-003
+    title: 线损率应在本机构配置的考核区间内
+    severity: info
+    basis:
+      document: 《电力网电能损耗计算导则》
+      number: DL/T 686-2018
+      clause: 第8章 电力网电能损耗分析与降损措施效果计算
+      excerpt: 该章条文本次未取得：DL/T 686-2018 正文未公开免费全文，仅核实到其目次含「电力网电能损耗分析与降损措施效果计算」一章。
+      kind: institutional-configuration
+      source: https://ebook.chinabuilding.com.cn/zbooklib/bookpdf/probation?SiteID=1&bookID=141185
+    params:
+      minRate: 0
+      maxRate: 0
+    note: >-
+      maxRate 出场为 0，表示**未配置**，本条进 skipped。
+      依据说明：DL/T 686-2018 第 8 章规定了电能损耗分析的方法（章名已核实），
+      但**线损考核指标本身是本机构或上级单位按线路、按年下达的**，不是国家标准；
+      本插件因此**不硬编码任何考核值**，由使用方填入本年度该线路的指标区间。
+      本条命中只表示"超出你配置的区间"，**不表示线损异常**。
+
+  - id: PL-004
+    title: 计量点电量合计应与售电量（或供电量）一致
+    severity: warn
+    basis:
+      document: 《电力网电能损耗计算导则》
+      number: DL/T 686-2018
+      clause: 第3章 术语和定义
+      excerpt: 该条术语条文本次未取得：DL/T 686-2018 正文未公开免费全文，仅核实到其目次含「术语和定义」一章。
+      kind: derived-from-principle
+      source: https://ebook.chinabuilding.com.cn/zbooklib/bookpdf/probation?SiteID=1&bookID=141185
+    params:
+      toleranceKwh: 0
+    note: >-
+      合计口径一致是线损统计的**前置条件**，属定义性要求，依据状态同 PL-001（未取得逐字条文）。
+      本条只做加法核对；计量点遗漏、重复计入、抄表不同期都会造成差额，
+      具体原因必须人工核查。
+
+  - id: PL-005
+    title: 三相不平衡度应不超过本机构配置的限值
+    severity: info
+    basis:
+      document: 《电力网电能损耗计算导则》
+      number: DL/T 686-2018
+      clause: 第8章 电力网电能损耗分析与降损措施效果计算
+      excerpt: 该章条文本次未取得：DL/T 686-2018 正文未公开免费全文，仅核实到其目次含「电力网电能损耗分析与降损措施效果计算」一章。
+      kind: institutional-configuration
+      source: https://ebook.chinabuilding.com.cn/zbooklib/bookpdf/probation?SiteID=1&bookID=141185
+    params:
+      maxUnbalancePercent: 0
+    note: >-
+      maxUnbalancePercent 出场为 0，表示**未配置**，本条进 skipped。
+      三相不平衡度限值按电压等级与设备容量分档，属本机构运行标准，
+      **本插件不硬编码任何限值**。本条的不平衡度按 (最大值 − 最小值) ÷ 最大值 计算，
+      公式随命中信息一起给出，便于复核；**不判断是否构成缺陷**。
+
+disabled: []

@@ -1,0 +1,26 @@
+{
+  "ruleId": "PL-005",
+  "configure": {
+    "PL-005": {
+      "maxUnbalancePercent": 15
+    }
+  },
+  "pairs": [
+    {
+      "name": "expected-state",
+      "material": "PL-005-compliant.json",
+      "expect": {
+        "ruleId": "PL-005",
+        "count": 0
+      }
+    },
+    {
+      "name": "difference-present",
+      "material": "PL-005-unsafe.json",
+      "expect": {
+        "ruleId": "PL-005",
+        "count": 1
+      }
+    }
+  ]
+}

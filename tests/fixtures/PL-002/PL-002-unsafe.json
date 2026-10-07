@@ -1,0 +1,7 @@
+{
+  "name": "10kV 某某线",
+  "supplied": 120000,
+  "sold": 114000,
+  "loss": 6000,
+  "lossRate": 4.2
+}
