@@ -54,8 +54,7 @@ Findings always carry the numbers: `供电量 1000 kWh − 售电量 900 kWh = 1
 ## Install
 
 ```sh
-pnpm pack
-dsh plugin --profile <name> add ./dsh-power-loss-split-0.1.0.tgz
+dsh plugin --profile <name> add dsh-power-loss-split
 dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 ```
 

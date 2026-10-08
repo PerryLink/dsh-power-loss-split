@@ -42,8 +42,7 @@ tampering occurred. It reads a spreadsheet export and reports which sums do not 
 ## Install
 
 ```sh
-pnpm pack
-dsh plugin --profile <name> add ./*.tgz
+dsh plugin --profile <name> add dsh-power-loss-split
 dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 ```
 
