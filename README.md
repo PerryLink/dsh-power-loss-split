@@ -1,4 +1,23 @@
-# dsh-power-loss-split
+# dsh-power-loss-split — Line-loss energy split and assessment-table check
+
+`dsh-power-loss-split` reads one metering period for one line or transformer district — 供电量, 售电量, the declared 线损电量 and 线损率 and, when the material carries one, the list of metering points — and does arithmetic and interval checks on that material: the energy balance, the loss rate, the sum of the metering points, the loss-rate band you configure and the three-phase unbalance. Every finding carries the numbers and the tolerance it used, so a reviewer can redo the sum, and every check that could not run is listed in `skipped` instead of passing silently.
+
+## What it answers
+
+| You ask | What it answers |
+|---|---|
+| The declared 线损电量 does not match 供电量 − 售电量. Which of the three figures is wrong? | `PL-001` will not say. It reports the gap — `供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh 相差 50 kWh` — and compares it with the tolerance `toleranceKwh`, which ships at 0, so the three figures must agree exactly (report in 万 kWh and a rounding difference survives, so configure a non-zero tolerance). The rule only does the subtraction: it does not decide which of the three values is correct and does not check whether the readings are from the same period (抄表同期性). |
+| 线损率 is filled in as 5.00%, but 线损电量 ÷ 供电量 gives 6.25%. Is the denominator the problem? | `PL-002` shows the division: it computes 线损电量 ÷ 供电量 × 100 and reports the gap in 个百分点 against the declared rate, allowing `tolerancePoints` 0.01 个百分点 for rounding — the rounding rules themselves are cited separately, from GB/T 8170-2008, whose verbatim text this pack also does not have. It does not judge whether the denominator's caliber is right (口径, e.g. whether 无损电量 should be deducted): that has to be stated in the material or configured. |
+| Our line's loss rate looks high to me. Will the tool flag it? | Not on its own. `PL-003` compares the 线损率 only with the band you configure (`minRate` / `maxRate`); both ship at 0, meaning unconfigured, and then the rule is listed in `skipped` with its reason instead of passing silently. Even configured, it is capped at `info`: a hit means the rate is outside the band you set, not that the loss is abnormal. The assessment target is issued per line and per year by your own institution, so no target value is hard-coded. |
+| The list of metering points sums to less than the declared 售电量. Is a metering point missing? | `PL-004` reports the gap and nothing more: it adds the metering points that carry an energy value and compares the total with the declared 售电量 — or with 供电量 when no 售电量 is given — allowing `toleranceKwh` (0 by default). An omitted metering point, one counted twice and readings taken at different times (抄表不同期) all produce the same gap, so the cause must be checked by hand; the rule only does the addition. |
+| The sheet carries only A-phase and B-phase values. What does the unbalance check do? | `PL-005` lists itself in `skipped`: it needs metering points named A, B and C, and with fewer than three phase values it cannot run. Even with all three, the limit `maxUnbalancePercent` ships unconfigured (0) and the rule goes to `skipped` again. Once you set a limit it computes (最大值 − 最小值) ÷ 最大值, prints that formula with the finding, and is capped at `info` — it does not judge whether the unbalance constitutes a defect (是否构成缺陷). |
+
+## Standards it follows
+
+| Document | Number | Cited by rules |
+|---|---|---|
+| 《电力网电能损耗计算导则》 | DL/T 686-2018 | PL-001, PL-002, PL-003, PL-004, PL-005 |
+| 《数值修约规则与极限数值的表示和判定》 | GB/T 8170-2008 | PL-002 |
 
 **Boundary:** this plugin does **arithmetic and interval checks** on one metering period's line-loss
 figures — the energy balance, the loss rate, the meter-list sum, the phase unbalance — and shows its

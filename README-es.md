@@ -1,4 +1,23 @@
-# dsh-power-loss-split
+# dsh-power-loss-split — Reparto de la energía de pérdidas de línea y verificación de la tabla de evaluación
+
+`dsh-power-loss-split` lee un período de medición de una línea o de un centro de transformación — 供电量, 售电量, la 线损电量 y la 线损率 declaradas y, cuando el material la trae, la lista de puntos de medida — y hace comprobaciones aritméticas y de intervalo sobre ese material: el balance de energía, la tasa de pérdidas, la suma de los puntos de medida, la banda de tasa de pérdidas que usted configure y el desequilibrio entre fases. Cada hallazgo lleva los números y la tolerancia que utilizó, de modo que la cuenta se puede rehacer, y toda comprobación que no pudo ejecutarse se lista en `skipped` en lugar de pasar en silencio.
+
+## Qué responde
+
+| Usted pregunta | Qué responde |
+|---|---|
+| La 线损电量 declarada no cuadra con 供电量 − 售电量. ¿Cuál de las tres cifras está mal? | `PL-001` no lo dirá. Informa de la diferencia — `供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh 相差 50 kWh` — y la compara con la tolerancia `toleranceKwh`, que viene en 0, así que las tres cifras deben coincidir exactamente (si se declara en 万 kWh queda una diferencia de redondeo, y entonces hay que configurar una tolerancia distinta de cero). La regla solo hace la resta: no decide cuál de los tres valores es correcto ni comprueba si las lecturas son del mismo período (抄表同期性). |
+| La 线损率 figura como 5.00%, pero 线损电量 ÷ 供电量 da 6.25%. ¿El problema está en el denominador? | `PL-002` muestra la división: calcula 线损电量 ÷ 供电量 × 100 e informa de la diferencia en 个百分点 frente a la tasa declarada, admitiendo por defecto `tolerancePoints` 0.01 个百分点 por redondeo — las reglas de redondeo se citan aparte, de GB/T 8170-2008, cuyo texto literal este paquete tampoco tiene. No juzga si el criterio del denominador es correcto (口径, por ejemplo si debería deducirse la 无损电量): eso debe explicarlo el material o configurarlo usted. |
+| La tasa de pérdidas de mi línea me parece alta. ¿La herramienta la señalará? | No por sí sola. `PL-003` compara la 线损率 solo con la banda que usted configure (`minRate` / `maxRate`); ambas vienen en 0, es decir sin configurar, y entonces la regla se lista en `skipped` con su motivo en lugar de pasar en silencio. Aun configurada, está limitada a `info`: un hallazgo significa que la tasa queda fuera de la banda que usted fijó, no que las pérdidas sean anómalas. El objetivo de evaluación lo asigna su institución por línea y por año, así que no se fija ningún valor. |
+| La lista de puntos de medida suma menos que la 售电量 declarada. ¿Falta algún punto de medida? | `PL-004` informa de la diferencia y nada más: suma los puntos de medida que llevan un valor de energía y compara el total con la 售电量 declarada — o con la 供电量 cuando no hay 售电量 —, con la tolerancia `toleranceKwh` (0 por defecto). Un punto de medida omitido, uno contado dos veces y lecturas no simultáneas (抄表不同期) producen la misma diferencia, así que la causa debe verificarse a mano; la regla solo hace la suma. |
+| La hoja solo trae valores de la fase A y de la fase B. ¿Qué hace la comprobación de desequilibrio? | `PL-005` se lista en `skipped`: necesita puntos de medida llamados A, B y C, y con menos de tres valores de fase no puede ejecutarse. Aun con los tres, el límite `maxUnbalancePercent` viene sin configurar (0) y la regla vuelve a `skipped`. Cuando fije un límite, calcula (最大值 − 最小值) ÷ 最大值, imprime esa fórmula junto al hallazgo y está limitada a `info`: no juzga si el desequilibrio constituye un defecto (是否构成缺陷). |
+
+## Normas que sigue
+
+| Documento | Número | Reglas que lo citan |
+|---|---|---|
+| 《电力网电能损耗计算导则》 | DL/T 686-2018 | PL-001, PL-002, PL-003, PL-004, PL-005 |
+| 《数值修约规则与极限数值的表示和判定》 | GB/T 8170-2008 | PL-002 |
 
 **Boundary:** this plugin does **arithmetic and interval checks** on one metering period's line-loss
 figures — the energy balance, the loss rate, the meter-list sum, the phase unbalance — and shows its
