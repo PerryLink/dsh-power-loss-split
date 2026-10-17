@@ -4,6 +4,13 @@
 
 `dsh-power-loss-split` किसी एक लाइन या ट्रांसफार्मर-क्षेत्र की एक मीटरिंग अवधि की सामग्री पढ़ता है — 供电量, 售电量, दर्ज 线损电量 और 线损率 तथा, सामग्री में हो तो, मीटरिंग-बिंदुओं की सूची — और उस पर अंकगणितीय तथा अंतराल-जाँच करता है: ऊर्जा संतुलन, हानि दर, मीटरिंग बिंदुओं का जोड़, आपके द्वारा कॉन्फ़िगर की गई हानि-दर पट्टी और तीन-चरण असंतुलन। हर निष्कर्ष के साथ उसमें लगे अंक और सह्यता दिए जाते हैं, ताकि जाँचने वाला जोड़ दोबारा कर सके, और जो जाँच चल नहीं सकी वह चुपचाप पास होने के बजाय `skipped` में दर्ज होती है।
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-power-loss-split
+dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
+```
+
 ## आउटपुट कैसा दिखता है
 
 ![Terminal demo of dsh-power-loss-split: real output over its PL-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-power-loss-split/main/docs/assets/dsh-power-loss-split-hero.png)
@@ -67,13 +74,6 @@ tampering occurred. It reads a spreadsheet export and reports which sums do not 
 ## What it does
 
 नियम-सूची, फ़ील्ड और विस्तृत व्यवहार [README.md](README.md#what-it-does) (अंग्रेज़ी मुख्य संस्करण) में हैं। यह प्लगइन केवल उद्धृत धाराओं के सामने शाब्दिक अंतर सूचीबद्ध करता है और हर न चल पाई जाँच को `skipped` में बताता है।
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-power-loss-split
-dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
-```
 
 ## Configuration
 

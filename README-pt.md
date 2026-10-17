@@ -4,6 +4,13 @@
 
 `dsh-power-loss-split` lê um período de medição de uma linha ou de um posto de transformação — 供电量, 售电量, a 线损电量 e a 线损率 declaradas e, quando o material a traz, a lista de pontos de medição — e faz verificações aritméticas e de intervalo sobre esse material: o balanço de energia, a taxa de perdas, a soma dos pontos de medição, a faixa de taxa de perdas que você configurar e o desequilíbrio entre fases. Cada achado traz os números e a tolerância utilizados, para que a conta possa ser refeita, e toda verificação que não pôde ser executada é listada em `skipped` em vez de passar em silêncio.
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-power-loss-split
+dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
+```
+
 ## Como é a saída
 
 ![Terminal demo of dsh-power-loss-split: real output over its PL-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-power-loss-split/main/docs/assets/dsh-power-loss-split-hero.png)
@@ -67,13 +74,6 @@ tampering occurred. It reads a spreadsheet export and reports which sums do not 
 ## What it does
 
 A tabela de regras, os campos e o comportamento detalhado estão em [README.md](README.md#what-it-does) (versão principal em inglês). O plugin apenas lista divergências literais frente às cláusulas citadas e indica em `skipped` cada verificação que não pôde ser executada.
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-power-loss-split
-dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
-```
 
 ## Configuration
 

@@ -4,6 +4,13 @@
 
 `dsh-power-loss-split` reads one metering period for one line or transformer district — 供电量, 售电量, the declared 线损电量 and 线损率 and, when the material carries one, the list of metering points — and does arithmetic and interval checks on that material: the energy balance, the loss rate, the sum of the metering points, the loss-rate band you configure and the three-phase unbalance. Every finding carries the numbers and the tolerance it used, so a reviewer can redo the sum, and every check that could not run is listed in `skipped` instead of passing silently.
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-power-loss-split
+dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
+```
+
 ## What it looks like
 
 ![Terminal demo of dsh-power-loss-split: real output over its PL-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-power-loss-split/main/docs/assets/dsh-power-loss-split-hero.png)
@@ -79,13 +86,6 @@ declared rate, and optionally the meter list — applies a versioned rule pack, 
 
 Findings always carry the numbers: `供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh
 相差 50 kWh`. A reviewer who cannot redo the sum cannot judge the finding, so the sum is in the text.
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-power-loss-split
-dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
-```
 
 ## Configuration
 

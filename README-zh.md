@@ -4,6 +4,13 @@
 
 `dsh-power-loss-split` 读取一条线路或一台配变某一个抄表周期的线损材料——供电量、售电量、填报的线损电量与线损率，以及材料里有则一并读取的计量点清单——对这些数字做算术与区间核对：量平衡、线损率、计量点合计、你配置的线损率区间、三相不平衡度。每条命中都带着它用到的数字与容差，复核者可以自己重算；凡是跑不起来的检查都列在 `skipped` 里，而不是静默通过。
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-power-loss-split
+dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
+```
+
 ## 实际输出长什么样
 
 ![Terminal demo of dsh-power-loss-split: real output over its PL-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-power-loss-split/main/docs/assets/dsh-power-loss-split-hero.png)
@@ -67,13 +74,6 @@ tampering occurred. It reads a spreadsheet export and reports which sums do not 
 ## What it does
 
 规则表、字段说明与行为细节见 [README.md](README.md#what-it-does)（英文主版本）。本插件只列出材料与所引条款之间的字面差异，并对无法执行的检查在 `skipped` 中逐项说明。
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-power-loss-split
-dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
-```
 
 ## Configuration
 
