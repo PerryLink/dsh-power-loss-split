@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.6] - 2026-10-18
+
+### Fixed
+
+- **`check:citations` covers all excerpts, including `alsoBasis`.** Every `excerpt` is checked, including `alsoBasis`; excerpts explicitly marked “未逐字取得” are placeholders, not quotations.
+
 ## 0.2.5 - 2026-10-18
 
 - Fix: a rule that executed and found no difference is no longer placed in `skipped`. The report view labels only genuinely unexecuted rules as “未执行的检查”; `skippedCount` no longer counts executed-clean rules.
