@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-power-loss-split-hero.png",
+    "kind": "hero",
+    "alt": "dsh-power-loss-split terminal output",
+    "caption": "Real dsh-power-loss-split checker output; 32 tests passed."
+  },
+  {
+    "path": "docs/assets/dsh-power-loss-split-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-power-loss-split terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]
