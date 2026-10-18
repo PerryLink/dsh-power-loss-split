@@ -40,25 +40,13 @@ dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 
 **边界（中文译文，以英文原文为准）：** 本插件对某一个抄表周期的线损数据做**算术与区间核对**——量平衡、线损率、计量点合计、三相不平衡度——并在每条发现中给出计算过程。它不是计量工具，也不是计量故障排查工具（没有探针、没有 AMI 集成、没有硬件模型），不判定线损数值是否合理，也不判定是否发生篡改。它读取一份电子表格导出，报出哪些合计对不上。
 
-> ### ⚠️ Read this before trusting a citation in the report
+> ### ⚠️ 在相信报告中的引文之前，请先读这一节（以英文原文为准）
 >
-> **Every `excerpt` in this plugin's rule pack says, in so many words, that the clause text was not
-> obtained.** The two relations the plugin checks — 线损电量 = 供电量 − 售电量 and
-> 线损率 = 线损电量 ÷ 供电量 × 100 — are **definitional**, and their normative home is
-> **DL/T 686-2018《电力网电能损耗计算导则》**. That standard is **in force**, and its table of
-> contents was verified (chapter 3 is 术语和定义, chapter 8 is 电力网电能损耗分析与降损措施效果计算),
-> but **its body is not published for free**, so no verbatim clause could be read.
+> **本插件规则库中的每一个 `excerpt` 都明文写着：条款原文本次未取得。** 本插件核对的两个关系式——线损电量 = 供电量 − 售电量 与 线损率 = 线损电量 ÷ 供电量 × 100——是**定义性**的，其规范出处是 **DL/T 686-2018《电力网电能损耗计算导则》**。该标准**现行有效**，其目录已核实（第 3 章为术语和定义，第 8 章为电力网电能损耗分析与降损措施效果计算），但**其正文未免费公开**，因此无法读到任何逐字条款。
 >
-> Rather than paraphrase a quotation, this pack states the gap outright in the `excerpt` field and puts
-> the honest reasoning in `note`. Everything is therefore capped at `warn` (principle-derived) or `info`
-> (locally configured), and a test asserts that no rule claims a quotation it does not have. **When the
-> standard text is in hand, two things must be done: replace each `excerpt` with the real clause, and
-> raise `kind` to `direct`.** Until then a finding means "these two numbers do not close", not
-> "you violated a standard".
+> 本规则库不去转述一段引文，而是直接在 `excerpt` 字段中写明这一缺口，并把诚实的推理放进 `note`。因此所有内容都封顶于 `warn`（原则推导）或 `info`（本机构配置），并且有一项测试断言没有任何规则声称拥有它并不拥有的引文。**待取得标准原文后，必须做两件事：把每个 `excerpt` 换成真实条款，并把 `kind` 提到 `direct`。** 在做到之前，一条发现意味着「这两个数对不上」，而不是「你违反了标准」。
 >
-> **Assessment thresholds are yours, not the standard's.** Line-loss targets are issued per line and per
-> year by the enterprise or its superior, so `PL-003`'s band and `PL-005`'s unbalance limit ship
-> **empty**, and a rule that cannot run says so in `skipped` rather than passing silently.
+> **考核阈值是你的，不是标准的。** 线损指标由企业或其上级按线路、按年下达，因此 `PL-003` 的区间与 `PL-005` 的不平衡度限值出厂为**空**，跑不起来的规则会在 `skipped` 中如实说明，而不是静默通过。
 
 ## Compatibility
 
