@@ -1,6 +1,6 @@
 {
   "name": "dsh-power-loss-split",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "线损电量拆分与考核表核对（依据公开的线损计算口径，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
@@ -85,10 +85,9 @@
     "@deepseek-ai/schemastery": "3.18.5-alpha.1",
     "@types/node": "^22.20.1",
     "vitest": "^3.2.7",
-    "@deepseek-ai/dsh-working-directory": "0.2.1-rc.2"
-  },
-  "dependencies": {
+    "@deepseek-ai/dsh-working-directory": "0.2.1-rc.2",
     "tsdown": "^0.22.14",
     "typescript": "^5.9.3"
-  }
+  },
+  "dependencies": {}
 }
