@@ -38,11 +38,7 @@ dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 | 《电力网电能损耗计算导则》 | DL/T 686-2018 | PL-001, PL-002, PL-003, PL-004, PL-005 |
 | 《数值修约规则与极限数值的表示和判定》 | GB/T 8170-2008 | PL-002 |
 
-**Boundary:** this plugin does **arithmetic and interval checks** on one metering period's line-loss
-figures — the energy balance, the loss rate, the meter-list sum, the phase unbalance — and shows its
-working in every finding. It is not a metering or metering-fault tool (there is no probe, no AMI
-integration, no hardware model) and it does not decide whether a loss figure is reasonable or whether
-tampering occurred. It reads a spreadsheet export and reports which sums do not close.
+**边界（中文译文，以英文原文为准）：** 本插件对某一个抄表周期的线损数据做**算术与区间核对**——量平衡、线损率、计量点合计、三相不平衡度——并在每条发现中给出计算过程。它不是计量工具，也不是计量故障排查工具（没有探针、没有 AMI 集成、没有硬件模型），不判定线损数值是否合理，也不判定是否发生篡改。它读取一份电子表格导出，报出哪些合计对不上。
 
 > ### ⚠️ Read this before trusting a citation in the report
 >
