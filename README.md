@@ -28,6 +28,34 @@ dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 
 The table below is the example set: the first row is the detailed walkthrough, the remaining rows are short cases.
 
+#### Detailed output
+
+**Tool** `power_loss_split`
+
+**Input**
+
+~~~json
+{"name":"10kV 某某线","supplied":120000,"sold":114000,"loss":6000,"lossRate":4.2}
+~~~
+ 
+**Output**
+
+~~~json
+{
+  "id": "dsh-power-loss-split.PL-002.f0566556",
+  "ruleId": "PL-002",
+  "severity": "warn",
+  "locator": {
+    "column": "线损率"
+  },
+  "found": "线损电量 6000 kWh ÷ 供电量 120000 kWh × 100% = 5%，与填报的线损率 4.2% 相差 0.8 个百分点",
+  "expected": "线损率应为线损电量与供电量之比，允许偏差 0.01 个百分点",
+  "fix": "核对线损率的计算口径（分母是否为供电量、是否含无损电量）；本条只做除法核对"
+}
+~~~
+
+*Observed from `dsh-power-loss-split/tests/fixtures/PL-002/PL-002-unsafe.json (cases.json expects 1×PL-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | You ask | What it answers |
 |---|---|
 | The declared 线损电量 does not match 供电量 − 售电量. Which of the three figures is wrong? | `PL-001` will not say. It reports the gap — `供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh 相差 50 kWh` — and compares it with the tolerance `toleranceKwh`, which ships at 0, so the three figures must agree exactly (report in 万 kWh and a rounding difference survives, so configure a non-zero tolerance). The rule only does the subtraction: it does not decide which of the three values is correct and does not check whether the readings are from the same period (抄表同期性). |

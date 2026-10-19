@@ -29,6 +29,34 @@ dsh --profile <name> --dump-config | grep 'dsh-power-loss-split'
 
 下表是示例集：第一行是详细走查，其余行是简短案例。
 
+#### 详细输出
+
+**工具** `power_loss_split`
+
+**输入**
+
+~~~json
+{"name":"10kV 某某线","supplied":120000,"sold":114000,"loss":6000,"lossRate":4.2}
+~~~
+ 
+**输出**
+
+~~~json
+{
+  "id": "dsh-power-loss-split.PL-002.f0566556",
+  "ruleId": "PL-002",
+  "severity": "warn",
+  "locator": {
+    "column": "线损率"
+  },
+  "found": "线损电量 6000 kWh ÷ 供电量 120000 kWh × 100% = 5%，与填报的线损率 4.2% 相差 0.8 个百分点",
+  "expected": "线损率应为线损电量与供电量之比，允许偏差 0.01 个百分点",
+  "fix": "核对线损率的计算口径（分母是否为供电量、是否含无损电量）；本条只做除法核对"
+}
+~~~
+
+*来源 `dsh-power-loss-split/tests/fixtures/PL-002/PL-002-unsafe.json (cases.json expects 1×PL-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | 你会问 | 它怎么答 |
 |---|---|
 | 填报的线损电量与「供电量 − 售电量」对不上，这三个数里哪一个错了？ | `PL-001` 不作判断。它报出差额——`供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh 相差 50 kWh`——并与容差 `toleranceKwh` 比较；该参数出场为 0，要求三个数严格相等（按万 kWh 报送会留下进位差，此时应配置一个非零容差）。本条只做减法核对：不判断三个数值中哪一个正确，也不核对几次抄表是否同期。 |

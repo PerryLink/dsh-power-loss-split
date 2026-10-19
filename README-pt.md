@@ -29,6 +29,34 @@ Saída real deste plugin sobre o seu próprio fixture de teste `PL-001` — não
 
 A tabela abaixo é o conjunto de exemplos: a primeira linha é o caso detalhado e as demais são casos curtos.
 
+#### Saída detalhada
+
+**Ferramenta** `power_loss_split`
+
+**Entrada**
+
+~~~json
+{"name":"10kV 某某线","supplied":120000,"sold":114000,"loss":6000,"lossRate":4.2}
+~~~
+ 
+**Saída**
+
+~~~json
+{
+  "id": "dsh-power-loss-split.PL-002.f0566556",
+  "ruleId": "PL-002",
+  "severity": "warn",
+  "locator": {
+    "column": "线损率"
+  },
+  "found": "线损电量 6000 kWh ÷ 供电量 120000 kWh × 100% = 5%，与填报的线损率 4.2% 相差 0.8 个百分点",
+  "expected": "线损率应为线损电量与供电量之比，允许偏差 0.01 个百分点",
+  "fix": "核对线损率的计算口径（分母是否为供电量、是否含无损电量）；本条只做除法核对"
+}
+~~~
+
+*Observado em `dsh-power-loss-split/tests/fixtures/PL-002/PL-002-unsafe.json (cases.json expects 1×PL-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | Você pergunta | O que ele responde |
 |---|---|
 | A 线损电量 declarada não fecha com 供电量 − 售电量. Qual das três cifras está errada? | `PL-001` não o dirá. Reporta a diferença — `供电量 1000 kWh − 售电量 900 kWh = 100 kWh，与填报的线损电量 50 kWh 相差 50 kWh` — e compara-a com a tolerância `toleranceKwh`, que vem em 0, pelo que as três cifras têm de coincidir exatamente (se reportar em 万 kWh fica uma diferença de arredondamento, e então é preciso configurar uma tolerância diferente de zero). A regra só faz a subtração: não decide qual dos três valores está correto nem verifica se as leituras são do mesmo período (抄表同期性). |
