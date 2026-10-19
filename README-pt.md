@@ -3,6 +3,7 @@
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-power-loss-split?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-power-loss-split?ref=badge)
 
 `dsh-power-loss-split` lê um período de medição de uma linha ou de um posto de transformação — 供电量, 售电量, a 线损电量 e a 线损率 declaradas e, quando o material a traz, a lista de pontos de medição — e faz verificações aritméticas e de intervalo sobre esse material: o balanço de energia, a taxa de perdas, a soma dos pontos de medição, a faixa de taxa de perdas que você configurar e o desequilíbrio entre fases. Cada achado traz os números e a tolerância utilizados, para que a conta possa ser refeita, e toda verificação que não pôde ser executada é listada em `skipped` em vez de passar em silêncio.
 

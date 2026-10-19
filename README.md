@@ -3,6 +3,7 @@
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-power-loss-split?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-power-loss-split?ref=badge)
 
 `dsh-power-loss-split` reads one metering period for one line or transformer district — 供电量, 售电量, the declared 线损电量 and 线损率 and, when the material carries one, the list of metering points — and does arithmetic and interval checks on that material: the energy balance, the loss rate, the sum of the metering points, the loss-rate band you configure and the three-phase unbalance. Every finding carries the numbers and the tolerance it used, so a reviewer can redo the sum, and every check that could not run is listed in `skipped` instead of passing silently.
 

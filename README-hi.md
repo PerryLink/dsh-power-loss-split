@@ -3,6 +3,7 @@
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-power-loss-split?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-power-loss-split?ref=badge)
 
 `dsh-power-loss-split` किसी एक लाइन या ट्रांसफार्मर-क्षेत्र की एक मीटरिंग अवधि की सामग्री पढ़ता है — 供电量, 售电量, दर्ज 线损电量 और 线损率 तथा, सामग्री में हो तो, मीटरिंग-बिंदुओं की सूची — और उस पर अंकगणितीय तथा अंतराल-जाँच करता है: ऊर्जा संतुलन, हानि दर, मीटरिंग बिंदुओं का जोड़, आपके द्वारा कॉन्फ़िगर की गई हानि-दर पट्टी और तीन-चरण असंतुलन। हर निष्कर्ष के साथ उसमें लगे अंक और सह्यता दिए जाते हैं, ताकि जाँचने वाला जोड़ दोबारा कर सके, और जो जाँच चल नहीं सकी वह चुपचाप पास होने के बजाय `skipped` में दर्ज होती है।
 
