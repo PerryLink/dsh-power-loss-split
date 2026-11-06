@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-dark.svg">
-  <img src="docs/assets/dsh-power-loss-split-flow-light.svg" width="100%" alt="dsh-power-loss-split data flow: material → power_loss_split → rule pack PL-001…PL-005 → report (found / expected / fix / skipped)">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-hero-en-dark.webp">
+  <img src="docs/assets/dsh-power-loss-split-hero-en-light.webp" width="100%" alt="dsh-power-loss-split hero: the left column carries the PLUGIN tag, title, two value lines and the local-only note; the right panel uses the quickstart sample as two rulers — PL-001 puts the declared loss energy of 5 500 kWh against the derived 6 000 kWh (gap 500 kWh, tolerance 0), PL-002 puts the declared 5% against the computed 4.5833% (gap 0.4167 points, tolerance ±0.01) — with two warn findings and three skipped checks, each with its reason">
 </picture>
 
 # dsh-power-loss-split
@@ -47,6 +47,11 @@ material (JSON / YAML)──power_loss_split──▶ rules/power-loss-split.yam
 ```
 
 The tool is `power_loss_split`; material comes from a `file` path or inline `material` text. All computation happens host-side — no network, no model call.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="dsh-power-loss-split structure diagram: one metering period's material (supplied / sold / loss / lossRate / meters) goes through parseMaterial() onto one bus and into five parallel rule switches — PL-001 energy balance, PL-002 loss rate, PL-003 configured band, PL-004 meter sum, PL-005 phase unbalance. Each switch routes its rule to one of two rails by its formula and tolerance: a difference goes to issues[] with found / expected / fix / basis at warn severity; a check that could not run, or ran with no gap, goes to skipped[] with rule id and reason (clean runs are listed there too). Both rails end in one view: summary, issueCount, skippedCount, markdown, reportJson; this sample yields 2 warn and 3 skipped">
+</picture>
 
 ## Three-step setup
 
@@ -333,7 +338,7 @@ pnpm run check:citations
 node ../scripts/sync-shared.mjs dsh-power-loss-split   # refresh src/shared
 ```
 
-The last command copies the shared kit from `../_shared` into `src/shared/`; re-run it after every shared change. README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow, light/dark SVG pair) and are safe to re-run: `python scripts/gen-readme-assets.py`.
+The last command copies the shared kit from `../_shared` into `src/shared/`; re-run it after every shared change. README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Pillow builds the hero in zh/en × light/dark; the structure diagram is a hand-written SVG pair) and are safe to re-run: `python scripts/gen-readme-assets.py`.
 
 <details>
 <summary>Directory layout</summary>

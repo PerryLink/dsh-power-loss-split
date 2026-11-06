@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-dark.svg">
-  <img src="docs/assets/dsh-power-loss-split-flow-light.svg" width="100%" alt="dsh-power-loss-split डेटा प्रवाह: सामग्री → power_loss_split → नियम-पैक PL-001…PL-005 → रिपोर्ट (found / expected / fix / skipped)">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-hero-en-dark.webp">
+  <img src="docs/assets/dsh-power-loss-split-hero-en-light.webp" width="100%" alt="dsh-power-loss-split चित्र: बाईं ओर PLUGIN टैग, शीर्षक, दो मूल्य-पंक्तियाँ और स्थानीय-मात्र नोट; दाईं ओर quickstart नमूना दो पैमानों के रूप में — PL-001 दर्ज हानि ऊर्जा 5 500 kWh की तुलना व्युत्पन्न 6 000 kWh से करता है (अंतर 500 kWh, सहनशीलता 0), PL-002 दर्ज 5% की तुलना परिकलित 4.5833% से करता है (अंतर 0.4167 अंक, सहनशीलता ±0.01) — नीचे दो warn निष्कर्ष और तीन skipped जाँचें, हर एक के कारण सहित">
 </picture>
 
 # dsh-power-loss-split
@@ -47,6 +47,11 @@ dsh plugin --profile <name> add dsh-power-loss-split
 ```
 
 उपकरण का नाम `power_loss_split` है; सामग्री `file` पथ से या सीधे `material` पाठ से आती है। पूरी गणना होस्ट पर होती है — कोई नेटवर्क नहीं, कोई मॉडल कॉल नहीं।
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="dsh-power-loss-split का संरचना-आरेख: एक मीटरिंग अवधि की सामग्री (supplied / sold / loss / lossRate / meters) parseMaterial() से एक ही बस पर आकर पाँच समानांतर नियम-स्विचों में जाती है — PL-001 ऊर्जा संतुलन, PL-002 हानि दर, PL-003 कॉन्फ़िगर की गई पट्टी, PL-004 मीटरिंग-बिंदुओं का जोड़, PL-005 तीन-चरण असंतुलन। हर स्विच अपने सूत्र और सहनशीलता के अनुसार नियम को दो रेलों में से एक पर भेजता है: अंतर मिलने पर issues[] में found / expected / fix / basis और warn गंभीरता के साथ; जो जाँच चल नहीं सकी या बिना अंतर चली, वह skipped[] में नियम id और कारण के साथ (बिना अंतर चली जाँचें भी वहीं सूचीबद्ध होती हैं)। दोनों रेल एक ही view में मिलती हैं: summary, issueCount, skippedCount, markdown और reportJson; इस नमूने में 2 warn और 3 skipped हैं">
+</picture>
 
 ## तीन चरणों में शुरुआत
 
@@ -333,7 +338,7 @@ pnpm run check:citations
 node ../scripts/sync-shared.mjs dsh-power-loss-split   # src/shared ताज़ा करें
 ```
 
-अंतिम कमांड `../_shared` का साझा किट `src/shared/` में कॉपी करता है; हर साझा बदलाव के बाद इसे दोबारा चलाएँ। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से क्रमादेशित रूप से बनती हैं (Python + Pillow, हल्का/गहरा SVG जोड़ा) और दोबारा चलाई जा सकती हैं: `python scripts/gen-readme-assets.py`.
+अंतिम कमांड `../_shared` का साझा किट `src/shared/` में कॉपी करता है; हर साझा बदलाव के बाद इसे दोबारा चलाएँ। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से क्रमादेशित रूप से बनती हैं (hero को Pillow zh/en × हल्का/गहरा में बनाता है; संरचना-आरेख हाथ से लिखा गया SVG जोड़ा है) और दोबारा चलाई जा सकती हैं: `python scripts/gen-readme-assets.py`.
 
 <details>
 <summary>निर्देशिका संरचना</summary>

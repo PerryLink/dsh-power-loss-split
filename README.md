@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-dark.svg">
-  <img src="docs/assets/dsh-power-loss-split-flow-light.svg" width="100%" alt="dsh-power-loss-split 数据流：材料 → power_loss_split → 规则库 PL-001…PL-005 → 报告（found / expected / fix / skipped）">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-power-loss-split-hero-zh-light.webp" width="100%" alt="dsh-power-loss-split 配图：左侧是 PLUGIN 标签、标题、两行价值句与「纯主机端」说明；右侧用 quickstart 样例并排两把尺子——PL-001 把填报的线损电量 5 500 kWh 与推算的 6 000 kWh 放在同一根轴上（差 500 kWh、容差 0），PL-002 把填报的 5% 与算出的 4.5833% 放在同一根轴上（差 0.4167 个百分点、容差 ±0.01），下方是 2 条 warn 命中与 3 条 skipped 及各自原因">
 </picture>
 
 # dsh-power-loss-split
@@ -47,6 +47,11 @@ dsh plugin --profile <name> add dsh-power-loss-split
 ```
 
 工具名是 `power_loss_split`；材料从 `file` 路径读，或直接用 `material` 内联文本。计算全程在主机端完成，不联网、不调用模型。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="dsh-power-loss-split 结构图：一份抄表周期的材料（supplied / sold / loss / lossRate / meters）经 parseMaterial() 接上同一根母线，并行进入 5 个规则开关（PL-001 量平衡、PL-002 线损率、PL-003 配置区间、PL-004 计量点合计、PL-005 三相不平衡度）；每个开关按「算式 + 容差或阈值」把这条规则接到两条汇流母线之一——命中的进 issues[]（带 found / expected / fix / basis 与 warn 严重级），未能执行或跑过但无差异的进 skipped[]（规则 id + 原因，跑过无差异的条目也一样列出）。两条母线汇入同一份 view：summary、issueCount、skippedCount、markdown、reportJson；本次样例为 2 条 warn、3 条 skipped">
+</picture>
 
 ## 三步上手
 
@@ -327,7 +332,7 @@ pnpm run check:citations
 node ../scripts/sync-shared.mjs dsh-power-loss-split   # 刷新 src/shared
 ```
 
-最后的 `sync-shared` 命令把 `../_shared` 的共享件同步进 `src/shared/`；每次改动共享件后都要重跑。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python + Pillow，输出深浅双版 SVG），可重复执行：`python scripts/gen-readme-assets.py`。
+最后的 `sync-shared` 命令把 `../_shared` 的共享件同步进 `src/shared/`；每次改动共享件后都要重跑。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（hero 横幅用 Pillow，zh / en × 深浅共四张；结构图是手写 SVG，深浅双版），可重复执行：`python scripts/gen-readme-assets.py`。
 
 <details>
 <summary>目录布局</summary>

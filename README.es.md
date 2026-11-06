@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-dark.svg">
-  <img src="docs/assets/dsh-power-loss-split-flow-light.svg" width="100%" alt="Flujo de datos de dsh-power-loss-split: material → power_loss_split → paquete de reglas PL-001…PL-005 → informe (found / expected / fix / skipped)">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-hero-en-dark.webp">
+  <img src="docs/assets/dsh-power-loss-split-hero-en-light.webp" width="100%" alt="dsh-power-loss-split, portada: la columna izquierda lleva la etiqueta PLUGIN, el título, las dos líneas de valor y la nota de ejecución local; el panel derecho usa el ejemplo del quickstart como dos reglas — PL-001 enfrenta la energía de pérdidas declarada de 5 500 kWh con los 6 000 kWh derivados (diferencia 500 kWh, tolerancia 0), PL-002 enfrenta el 5 % declarado con el 4,5833 % calculado (diferencia 0,4167 puntos, tolerancia ±0,01) — con dos hallazgos warn y tres comprobaciones omitidas, cada una con su motivo">
 </picture>
 
 # dsh-power-loss-split
@@ -47,6 +47,11 @@ material (JSON / YAML)──power_loss_split──▶ rules/power-loss-split.yam
 ```
 
 La herramienta es `power_loss_split`; el material se lee de una ruta `file` o del texto en línea `material`. Todo el cálculo ocurre en el host: sin red y sin llamadas al modelo.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-power-loss-split-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="Diagrama de estructura de dsh-power-loss-split: el material de un período de medición (supplied / sold / loss / lossRate / meters) pasa por parseMaterial() a un mismo bus y entra en cinco interruptores de regla en paralelo — PL-001 balance de energía, PL-002 tasa de pérdidas, PL-003 banda configurada, PL-004 suma de contadores, PL-005 desequilibrio entre fases. Cada interruptor lleva su regla a uno de dos canales según su fórmula y tolerancia: una diferencia va a issues[] con found / expected / fix / basis y severidad warn; una comprobación que no pudo ejecutarse, o que se ejecutó sin diferencia, va a skipped[] con el id de la regla y el motivo (las ejecuciones limpias también se listan). Ambos canales terminan en una sola vista: summary, issueCount, skippedCount, markdown y reportJson; este ejemplo da 2 warn y 3 skipped">
+</picture>
 
 ## Instalación en tres pasos
 
@@ -333,7 +338,7 @@ pnpm run check:citations
 node ../scripts/sync-shared.mjs dsh-power-loss-split   # refrescar src/shared
 ```
 
-El último comando copia el kit compartido de `../_shared` a `src/shared/`; vuelva a ejecutarlo tras cada cambio compartido. Las imágenes del README las genera [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow, par de SVG claro/oscuro) y se pueden volver a ejecutar: `python scripts/gen-readme-assets.py`.
+El último comando copia el kit compartido de `../_shared` a `src/shared/`; vuelva a ejecutarlo tras cada cambio compartido. Las imágenes del README las genera [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Pillow crea la portada en zh/en × claro/oscuro; el diagrama de estructura es un par de SVG escritos a mano) y se pueden volver a ejecutar: `python scripts/gen-readme-assets.py`.
 
 <details>
 <summary>Estructura de directorios</summary>
