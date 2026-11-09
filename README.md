@@ -1,6 +1,6 @@
 # dsh-power-loss-split — Line-loss energy split and assessment-table check
 
-[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+[English](README.md) · [简体中文](README-zh.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
 [![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-power-loss-split?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-power-loss-split?ref=badge)
