@@ -55,7 +55,7 @@ The tool is `power_loss_split`; material comes from a `file` path or inline `mat
 
 ## Three-step setup
 
-1. **Install** (pick one channel; npm has `0.2.10`):
+1. **Install** (pick one channel; npm has `0.2.12`):
 
    ```sh
    # git channel (latest main)

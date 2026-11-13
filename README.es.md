@@ -55,7 +55,7 @@ La herramienta es `power_loss_split`; el material se lee de una ruta `file` o de
 
 ## Instalación en tres pasos
 
-1. **Instalar** (elija un canal; npm tiene `0.2.10`):
+1. **Instalar** (elija un canal; npm tiene `0.2.12`):
 
    ```sh
    # canal git (última main)

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.12] - 2026-11-13
+
+### Changed
+
+- Dev dependencies: `@deepseek-ai/cordis` 4.0.5 → 4.1.0, `@deepseek-ai/schemastery` 3.18.5 → 3.19.0 and `tsdown` 0.23.1 → 0.23.7 (#18); `@deepseek-ai/dsh-package-manifest` 0.2.1-rc.2 → 0.2.1-rc.5 (#17). No rule-pack, report-shape or tool-signature change.
+
 ## [0.2.9] - 2026-10-18
 
 ### Changed

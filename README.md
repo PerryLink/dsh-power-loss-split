@@ -55,7 +55,7 @@ dsh plugin --profile <name> add dsh-power-loss-split
 
 ## 三步上手
 
-1. **安装**（三选一；npm 已发布 `0.2.10`）：
+1. **安装**（三选一；npm 已发布 `0.2.12`）：
 
    ```sh
    # git 通道（最新 main）
