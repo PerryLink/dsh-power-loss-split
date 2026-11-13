@@ -1,10 +1,56 @@
 # Changelog
 
+## [0.3.0] - 2026-11-13
+
+0.2.12 was cut from `main` after 0.2.11 had already been published from
+`reconcile-yaml`, but the eight commits behind 0.2.11 were never merged into
+`main`. 0.2.12 therefore contained only the dependabot updates and was a
+functional regression against 0.2.11. 0.3.0 merges those commits back into
+`main` and restores the 0.2.11 feature set.
+
+### Added
+
+- Report execution accounting: `execution.total`, `executed`, `skipped`, `manual`
+  and `unsupported` are part of the canonical report and the model-facing view,
+  so a completed check that found no difference is distinguishable from one that
+  never ran.
+- Rules whose check kind has no engine implementation are counted as
+  `unsupported` instead of being folded into the skipped count.
+- `Locator.table` names the source table, participates in the stable issue id and
+  is included in the rendered location.
+- `capability.json` (tier `L1-lite`) ships with the package and records the
+  supported input formats, outputs, rule count and honest limits.
+
+### Fixed
+
+- A rule that executed and found no difference is no longer reported in
+  `skipped` or labelled "未执行".
+
+### Changed
+
+- The 0.2.12 dev-dependency updates are retained (`@deepseek-ai/cordis` 4.1.0,
+  `@deepseek-ai/schemastery` 3.19.0, `tsdown` 0.23.7,
+  `@deepseek-ai/dsh-package-manifest` 0.2.1-rc.5).
+- No rule-pack or tool-signature change. The five-language README set and its
+  `check:readmes` gate are unchanged.
+
 ## [0.2.12] - 2026-11-13
+
+> **Not included: the 0.2.11 changes.** This release was cut from `main`; the
+> eight `reconcile-yaml` commits behind 0.2.11 had never been merged, so 0.2.12
+> shipped only the dev-dependency bumps below and is a functional regression
+> against 0.2.11. 0.3.0 restores those features.
 
 ### Changed
 
 - Dev dependencies: `@deepseek-ai/cordis` 4.0.5 → 4.1.0, `@deepseek-ai/schemastery` 3.18.5 → 3.19.0 and `tsdown` 0.23.1 → 0.23.7 (#18); `@deepseek-ai/dsh-package-manifest` 0.2.1-rc.2 → 0.2.1-rc.5 (#17). No rule-pack, report-shape or tool-signature change.
+
+## [0.2.11] - 2026-11-10
+
+Published from `reconcile-yaml`. The commits behind this release did not land on
+`main`; they are merged and restored in 0.3.0 (execution accounting, a separate
+`unsupported` count, `Locator.table`, the executed-clean fix and
+`capability.json`).
 
 ## [0.2.9] - 2026-10-18
 

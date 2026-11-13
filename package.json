@@ -1,6 +1,6 @@
 {
   "name": "dsh-power-loss-split",
-  "version": "0.2.12",
+  "version": "0.3.0",
   "description": "线损电量拆分与考核表核对（依据公开的线损计算口径，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
@@ -17,10 +17,10 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "README-zh.md",
-    "README-es.md",
-    "README-pt.md",
-    "README-hi.md",
+    "README.en.md",
+    "README.es.md",
+    "README.pt.md",
+    "README.hi.md",
     "locale/*.json",
     "icon.svg",
     "rules",
@@ -29,7 +29,8 @@
     "docs/assets/*",
     "samples",
     "TROUBLESHOOTING.md",
-    "screenshots.json"
+    "screenshots.json",
+    "capability.json"
   ],
   "scripts": {
     "build": "tsdown",

@@ -40,16 +40,16 @@ dsh-plugin-guide skill and the official plugin contract; this file records repo-
 ## Build and checks
 
 ```sh
-pnpm run typecheck && pnpm test && pnpm run build && pnpm run verify:self-contained && pnpm run check:lockfile && pnpm run check:readmes && pnpm pack
+pnpm run typecheck && pnpm test && pnpm run build && pnpm run verify:self-contained && pnpm run check:lockfile && pnpm run check:readmes && pnpm run check:citations && pnpm pack
 ```
 
 `prepublishOnly` re-runs the gate, so a release cannot ship an unbuilt or drifted tree.
 
 ## Docs
 
-Five-language READMEs (`README.md`, `README-zh.md`, `README-es.md`, `README-pt.md`,
-`README-hi.md`). The English file is the source of truth; `check:readmes` holds the other four to
-the same `## ` section count, the same install command and the same configuration keys.
+Five-language READMEs (`README.md`, `README.en.md`, `README.es.md`, `README.pt.md`,
+`README.hi.md`). The Chinese `README.md` is the source of truth; `check:readmes` holds the other
+four to the same `## ` section count, the install command and the same configuration keys.
 
 ## Publishing
 

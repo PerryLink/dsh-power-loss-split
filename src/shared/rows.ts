@@ -2059,10 +2059,11 @@ function runChecks(
   input: TableInput,
   ruleset: Ruleset,
   options: TableCheckOptions,
-): { issues: Issue[]; fired: Set<string>; reasons: Map<string, string> } {
+): { issues: Issue[]; fired: Set<string>; reasons: Map<string, string>; ran: Set<string> } {
   const issues: Issue[] = []
   const reasons = new Map<string, string>()
   const fired = new Set<string>()
+  const ran = new Set<string>()
   const disabled = new Set([...ruleset.disabled, ...options.disabledRules])
   const only = new Set(options.onlyRules)
 
@@ -2108,12 +2109,14 @@ function runChecks(
       },
       skip: (reason) => {
         reasons.set(rule.id, reason)
+        ran.delete(rule.id)
       },
     }
+    ran.add(rule.id)
     runOneCheck(ctx)
   }
 
-  return { issues, fired, reasons }
+  return { issues, fired, reasons, ran }
 }
 
 /** One skipped entry per disabled rule, whether or not the pack declares it. */
@@ -2140,7 +2143,7 @@ function disabledAsSkipped(ruleset: Ruleset, disabled: string[], note: (reason: 
 export function runTableCheck(input: TableInput, ruleset: Ruleset, options: TableCheckOptions): Report {
   const disabled = new Set([...ruleset.disabled, ...options.disabledRules])
   const only = new Set(options.onlyRules)
-  const { issues, fired, reasons } = runChecks(input, ruleset, options)
+  const { issues, fired, reasons, ran } = runChecks(input, ruleset, options)
 
   const withNote = (reason: string): string =>
     options.skipNotes === undefined || options.skipNotes === '' ? reason : `${reason}；${options.skipNotes}`
@@ -2169,6 +2172,15 @@ export function runTableCheck(input: TableInput, ruleset: Ruleset, options: Tabl
   const summary: Record<Severity, number> = { error: 0, warn: 0, info: 0 }
   for (const issue of issues) summary[issue.severity] += 1
 
+  const total = ruleset.rules.length
+  const executed = ran.size
+  // Rules whose check kind has no engine implementation are named in `skipped`
+  // with an explicit reason. Count them separately so "skipped" means "could not
+  // run for lack of data" and "unsupported" means "this engine has no such
+  // check", instead of collapsing both into a single number.
+  const unsupported = [...reasons.values()].filter(
+    (reason) => reason.includes('不是本引擎支持的检查类型') || reason.includes('规则库未配置 check.kind'),
+  ).length
   return {
     plugin: options.plugin,
     target: input.target,
@@ -2177,5 +2189,6 @@ export function runTableCheck(input: TableInput, ruleset: Ruleset, options: Tabl
     summary,
     issues,
     skipped,
+    execution: { total, executed, skipped: Math.max(0, total - executed - unsupported), manual: 0, unsupported },
   }
 }

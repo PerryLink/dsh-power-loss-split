@@ -55,7 +55,7 @@ A ferramenta é `power_loss_split`; o material vem de um caminho `file` ou do te
 
 ## Instalação em três passos
 
-1. **Instalar** (escolha um canal; o npm tem `0.2.12`):
+1. **Instalar** (escolha um canal; o npm tem `0.3.0`):
 
    ```sh
    # canal git (main mais recente)
