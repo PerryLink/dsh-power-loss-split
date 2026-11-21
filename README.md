@@ -36,6 +36,10 @@ dsh plugin --profile <name> add dsh-power-loss-split
 
 ## 它是什么
 
+![dsh-power-loss-split 真实终端运行](docs/assets/dsh-power-loss-split-demo.gif)
+
+*本仓库一次真实运行的动图回放。*
+
 `dsh-power-loss-split` 读取一条线路或一台配变某一个抄表周期的线损材料——`supplied`（供电量）、`sold`（售电量）、`loss`（线损电量）、`lossRate`（线损率），以及材料里有则一并读取的 `meters` 计量点清单——对这些数字做算术与区间核对：量平衡、线损率、计量点合计、你配置的线损率区间、三相不平衡度。每条命中都带着它用到的数字与容差，复核者可以自己重算；凡是跑不起来的检查都列在 `skipped` 里，而不是静默通过。
 
 ```text

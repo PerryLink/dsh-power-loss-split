@@ -53,6 +53,11 @@ A ferramenta é `power_loss_split`; o material vem de um caminho `file` ou do te
   <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="Diagrama de estrutura do dsh-power-loss-split: o material de um período de medição (supplied / sold / loss / lossRate / meters) passa por parseMaterial() para um mesmo barramento e entra em cinco interruptores de regra em paralelo — PL-001 balanço de energia, PL-002 taxa de perdas, PL-003 faixa configurada, PL-004 soma dos medidores, PL-005 desequilíbrio entre fases. Cada interruptor leva a sua regra a um de dois canais conforme a fórmula e a tolerância: uma diferença vai para issues[] com found / expected / fix / basis e severidade warn; uma verificação que não pôde executar, ou que executou sem diferença, vai para skipped[] com o id da regra e o motivo (execuções limpas também são listadas). Os dois canais terminam numa só visão: summary, issueCount, skippedCount, markdown e reportJson; este exemplo dá 2 warn e 3 skipped">
 </picture>
 
+![dsh-power-loss-split: execução real de terminal](docs/assets/dsh-power-loss-split-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Instalação em três passos
 
 1. **Instalar** (escolha um canal; o npm tem `0.3.0`):

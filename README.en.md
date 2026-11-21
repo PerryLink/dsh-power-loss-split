@@ -53,6 +53,11 @@ The tool is `power_loss_split`; material comes from a `file` path or inline `mat
   <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="dsh-power-loss-split structure diagram: one metering period's material (supplied / sold / loss / lossRate / meters) goes through parseMaterial() onto one bus and into five parallel rule switches — PL-001 energy balance, PL-002 loss rate, PL-003 configured band, PL-004 meter sum, PL-005 phase unbalance. Each switch routes its rule to one of two rails by its formula and tolerance: a difference goes to issues[] with found / expected / fix / basis at warn severity; a check that could not run, or ran with no gap, goes to skipped[] with rule id and reason (clean runs are listed there too). Both rails end in one view: summary, issueCount, skippedCount, markdown, reportJson; this sample yields 2 warn and 3 skipped">
 </picture>
 
+![dsh-power-loss-split: real terminal run](docs/assets/dsh-power-loss-split-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
+
 ## Three-step setup
 
 1. **Install** (pick one channel; npm has `0.3.0`):

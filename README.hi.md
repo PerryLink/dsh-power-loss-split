@@ -53,6 +53,11 @@ dsh plugin --profile <name> add dsh-power-loss-split
   <img src="docs/assets/dsh-power-loss-split-flow-v5-light.svg" width="100%" alt="dsh-power-loss-split का संरचना-आरेख: एक मीटरिंग अवधि की सामग्री (supplied / sold / loss / lossRate / meters) parseMaterial() से एक ही बस पर आकर पाँच समानांतर नियम-स्विचों में जाती है — PL-001 ऊर्जा संतुलन, PL-002 हानि दर, PL-003 कॉन्फ़िगर की गई पट्टी, PL-004 मीटरिंग-बिंदुओं का जोड़, PL-005 तीन-चरण असंतुलन। हर स्विच अपने सूत्र और सहनशीलता के अनुसार नियम को दो रेलों में से एक पर भेजता है: अंतर मिलने पर issues[] में found / expected / fix / basis और warn गंभीरता के साथ; जो जाँच चल नहीं सकी या बिना अंतर चली, वह skipped[] में नियम id और कारण के साथ (बिना अंतर चली जाँचें भी वहीं सूचीबद्ध होती हैं)। दोनों रेल एक ही view में मिलती हैं: summary, issueCount, skippedCount, markdown और reportJson; इस नमूने में 2 warn और 3 skipped हैं">
 </picture>
 
+![dsh-power-loss-split का असली टर्मिनल रन](docs/assets/dsh-power-loss-split-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## तीन चरणों में शुरुआत
 
 1. **इंस्टॉल** (कोई एक चैनल; npm पर `0.3.0` है):
