@@ -7,6 +7,8 @@
 
 # dsh-power-loss-split
 
+Current version `0.3.2`.
+
 **One metering period of line-loss figures, checked in one pass: which row does not close, by how much, and what to fix.**
 
 A DSH checker for utility line-loss teams: it reads the supplied energy, sold energy, declared line-loss energy and rate, plus the metering-point list when present, then runs arithmetic and interval checks. Every finding carries its numbers and tolerance; every check that cannot run lands in `skipped` with a reason.
