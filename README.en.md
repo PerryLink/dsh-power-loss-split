@@ -11,10 +11,12 @@
 
 A DSH checker for utility line-loss teams: it reads the supplied energy, sold energy, declared line-loss energy and rate, plus the metering-point list when present, then runs arithmetic and interval checks. Every finding carries its numbers and tolerance; every check that cannot run lands in `skipped` with a reason.
 
+Last verified on DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Install](#three-step-setup) · [Configuration](#configuration) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
-[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#compatibility)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.1-4B67B4?style=flat-square&labelColor=2B3245)](#compatibility)
 [![npm](https://img.shields.io/npm/v/dsh-power-loss-split?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-power-loss-split)
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-power-loss-split/ci.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-power-loss-split/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24-339933?style=flat-square&labelColor=2B3245)](#compatibility)
@@ -57,10 +59,9 @@ The tool is `power_loss_split`; material comes from a `file` path or inline `mat
 
 *Animated replay of a real run recorded in this repository.*
 
-
 ## Three-step setup
 
-1. **Install** (pick one channel; npm has `0.3.0`):
+1. **Install** (pick one channel; npm has `0.3.1`):
 
    ```sh
    # git channel (latest main)
@@ -315,7 +316,7 @@ Evidence: the registration surface in `src/index.ts` (`export const inject = ['t
 
 | Surface | Status |
 |---|---|
-| Harness | Peer range `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.0` — verified to accept both `0.2.0-rc.2` and `0.2.1-rc.2`. `engines.dsh` is declared as `>=0.2.1-0 <0.3.0` and is enforced by the host since 0.2.1 |
+| Harness | Peer range `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.1` — verified to accept both `0.2.0-rc.2` and `0.2.1-rc.2`. `engines.dsh` is declared as `>=0.2.1-0 <0.3.1` and is enforced by the host since 0.2.1 |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Platforms | All (plain ESM; no native code, no network, no model call) |
 | Tool mode | Works in `native` and `ptc`; for a period-by-period batch use `ptc` |

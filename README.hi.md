@@ -11,10 +11,12 @@
 
 लाइन-हानि टीमों के लिए एक DSH जाँच प्लगइन: यह आपूर्त ऊर्जा, विक्रय ऊर्जा, दर्ज लाइन-हानि ऊर्जा और हानि दर, तथा सामग्री में हो तो मीटरिंग-बिंदुओं की सूची पढ़ता है और अंकगणितीय व अंतराल-जाँच करता है। हर निष्कर्ष के साथ उसके अंक और सह्यता दिए जाते हैं; जो जाँच चल नहीं सकती वह कारण के साथ `skipped` में जाती है।
 
+अंतिम सत्यापन: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [इंस्टॉल](#तीन-चरणों-में-शुरुआत) · [कॉन्फ़िगरेशन](#कॉन्फ़िगरेशन) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
-[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#संगतता)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.1-4B67B4?style=flat-square&labelColor=2B3245)](#संगतता)
 [![npm](https://img.shields.io/npm/v/dsh-power-loss-split?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-power-loss-split)
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-power-loss-split/ci.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-power-loss-split/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24-339933?style=flat-square&labelColor=2B3245)](#संगतता)
@@ -57,10 +59,9 @@ dsh plugin --profile <name> add dsh-power-loss-split
 
 *इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
 
-
 ## तीन चरणों में शुरुआत
 
-1. **इंस्टॉल** (कोई एक चैनल; npm पर `0.3.0` है):
+1. **इंस्टॉल** (कोई एक चैनल; npm पर `0.3.1` है):
 
    ```sh
    # git चैनल (नवीनतम main)
@@ -315,7 +316,7 @@ meters:
 
 | सतह | स्थिति |
 |---|---|
-| Harness | peer रेंज `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.0` — `0.2.0-rc.2` और `0.2.1-rc.2` दोनों को स्वीकार करने के लिए सत्यापित। `engines.dsh` `>=0.2.1-0 <0.3.0` के रूप में घोषित है और 0.2.1 से होस्ट इसे लागू करता है |
+| Harness | peer रेंज `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.1` — `0.2.0-rc.2` और `0.2.1-rc.2` दोनों को स्वीकार करने के लिए सत्यापित। `engines.dsh` `>=0.2.1-0 <0.3.1` के रूप में घोषित है और 0.2.1 से होस्ट इसे लागू करता है |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | प्लेटफ़ॉर्म | सभी (शुद्ध ESM; कोई नेटिव कोड नहीं, कोई नेटवर्क नहीं, कोई मॉडल कॉल नहीं) |
 | टूल मोड | `native` और `ptc` में काम करता है; पूरी निर्देशिका के लिए `ptc` चुनें |

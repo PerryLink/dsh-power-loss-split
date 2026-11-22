@@ -11,10 +11,12 @@
 
 面向供电所与线损管理岗的 DSH 核查插件：读取供电量、售电量、线损电量、线损率与计量点清单，做算术与区间核对；每条命中都带算式与容差，跑不起来的检查进 `skipped` 并写明原因。
 
+最近一次核验：DeepSeek Harness `dsh-v0.2.3-alpha.1`（2026-11-22）。
+
 [安装](#三步上手) · [配置](#配置) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
-[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#兼容性)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.1-4B67B4?style=flat-square&labelColor=2B3245)](#兼容性)
 [![npm](https://img.shields.io/npm/v/dsh-power-loss-split?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-power-loss-split)
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-power-loss-split/ci.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-power-loss-split/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24-339933?style=flat-square&labelColor=2B3245)](#兼容性)
@@ -59,7 +61,7 @@ dsh plugin --profile <name> add dsh-power-loss-split
 
 ## 三步上手
 
-1. **安装**（三选一；npm 已发布 `0.3.0`）：
+1. **安装**（三选一；npm 已发布 `0.3.1`）：
 
    ```sh
    # git 通道（最新 main）
@@ -308,7 +310,7 @@ profile patch 覆盖示例：
 
 | 项目 | 状态 |
 |---|---|
-| Harness | 对等版本范围 `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.0` —— 已实测同时接受 `0.2.0-rc.2` 与 `0.2.1-rc.2`。`engines.dsh` 声明为 `>=0.2.1-0 <0.3.0`，自 0.2.1 起由宿主强制 |
+| Harness | 对等版本范围 `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.1` —— 已实测同时接受 `0.2.0-rc.2` 与 `0.2.1-rc.2`。`engines.dsh` 声明为 `>=0.2.1-0 <0.3.1`，自 0.2.1 起由宿主强制 |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | 平台 | 全平台（纯 ESM；无原生代码、无联网、不调用模型） |
 | 工具模式 | `native` / `ptc` 均可；批量核对整个目录时建议 `ptc`，schema 成本只付一次 |

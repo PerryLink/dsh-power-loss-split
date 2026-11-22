@@ -11,10 +11,12 @@
 
 Un verificador DSH para equipos de pérdidas de línea: lee la energía suministrada, la energía vendida, la energía de pérdidas declarada y su tasa, más la lista de puntos de medida cuando el material la trae, y aplica comprobaciones aritméticas y de intervalo. Cada hallazgo lleva sus números y su tolerancia; toda comprobación que no puede ejecutarse queda en `skipped` con su motivo.
 
+Última verificación: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Instalación](#instalación-en-tres-pasos) · [Configuración](#configuración) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
-[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.0-4B67B4?style=flat-square&labelColor=2B3245)](#compatibilidad)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.2.1%20%3C0.3.1-4B67B4?style=flat-square&labelColor=2B3245)](#compatibilidad)
 [![npm](https://img.shields.io/npm/v/dsh-power-loss-split?style=flat-square&labelColor=2B3245&color=CB3837)](https://www.npmjs.com/package/dsh-power-loss-split)
 [![CI](https://img.shields.io/github/actions/workflow/status/PerryLink/dsh-power-loss-split/ci.yml?branch=main&label=CI&style=flat-square&labelColor=2B3245)](https://github.com/PerryLink/dsh-power-loss-split/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24-339933?style=flat-square&labelColor=2B3245)](#compatibilidad)
@@ -57,10 +59,9 @@ La herramienta es `power_loss_split`; el material se lee de una ruta `file` o de
 
 *Repetición animada de una ejecución real registrada en este repositorio.*
 
-
 ## Instalación en tres pasos
 
-1. **Instalar** (elija un canal; npm tiene `0.3.0`):
+1. **Instalar** (elija un canal; npm tiene `0.3.1`):
 
    ```sh
    # canal git (última main)
@@ -315,7 +316,7 @@ Evidencia: la superficie de registro en `src/index.ts` (`export const inject = [
 
 | Superficie | Estado |
 |---|---|
-| Harness | Rango de peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.0` — verificado para aceptar tanto `0.2.0-rc.2` como `0.2.1-rc.2`. `engines.dsh` se declara como `>=0.2.1-0 <0.3.0` y el host lo aplica desde 0.2.1 |
+| Harness | Rango de peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.2.0-0 <0.3.1` — verificado para aceptar tanto `0.2.0-rc.2` como `0.2.1-rc.2`. `engines.dsh` se declara como `>=0.2.1-0 <0.3.1` y el host lo aplica desde 0.2.1 |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Plataformas | Todas (ESM puro; sin código nativo, sin red, sin llamada al modelo) |
 | Modo de herramienta | Funciona en `native` y `ptc`; para un directorio completo use `ptc` |
